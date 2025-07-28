@@ -33,7 +33,7 @@ app.use('/scripts', express.static(path.join(__dirname, '/scripts')));
 
 // 3) root sayfası
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'send_ngl.html'));
 });
 
 // 4) public klasöründeki html'leri .html yazmadan göster
