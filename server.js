@@ -14,17 +14,15 @@ const sendMessageRouter = require('./routes/sendMessage');
 const app = express();
 const PORT = process.env.PORT || 1001;
 
-// MongoDB bağlantısı
 mongoose.connect(process.env.MONGO_URI, {});
 
-// Middleware
 app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
 
-// Public klasörü
+// 1) public dosyaları static servis et
 app.use(express.static(path.join(__dirname, 'public')));
 
-// API routerlar
+// 2) API rotaları
 app.use('/api', authRouter);
 app.use('/api', profileRouter);
 app.use('/api', confirmCodeRouter);
@@ -33,12 +31,12 @@ app.use('/api', sendMessageRouter);
 app.use('/middleware', middlewareRouter);
 app.use('/scripts', express.static(path.join(__dirname, '/scripts')));
 
-// Ana sayfa
+// 3) root sayfası
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// Public klasöründeki .html dosyalarını .html yazmadan göster
+// 4) public klasöründeki html'leri .html yazmadan göster
 app.get('/:page', (req, res, next) => {
   const filePath = path.join(__dirname, 'public', `${req.params.page}.html`);
   res.sendFile(filePath, (err) => {
@@ -48,7 +46,7 @@ app.get('/:page', (req, res, next) => {
   });
 });
 
-// 404
+// 5) 404
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
