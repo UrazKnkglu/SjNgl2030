@@ -34,15 +34,23 @@ app.use('/api', sendMessageRouter);
 app.use('/middleware', middlewareRouter);
 app.use('/scripts', express.static(path.join(__dirname, '/scripts')));
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'send_ngl.html'));
+});
+
+// public klasöründeki .html dosyalarını .html yazmadan aç
 app.get('/:page', (req, res, next) => {
-    const filePath = path.join(__dirname, 'public', `${req.params.page}.html`);
-    res.sendFile(filePath, err => {
-      if (err) next(); // if file not found, let other routes handle it
-    });
-  });  
-  
+  const filePath = path.join(__dirname, 'public', `${req.params.page}.html`);
+  res.sendFile(filePath, (err) => {
+    if (err) {
+      next(); // Dosya yoksa 404'e düş
+    }
+  });
+});
+
+// 404 fallback
 app.use((req, res) => {
-    res.status(404).send('Page not found');
+  res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
 app.listen(PORT, '0.0.0.0', () => {
