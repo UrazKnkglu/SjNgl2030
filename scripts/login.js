@@ -8,7 +8,7 @@ fetch('/api/profile', {
     }
 })
 .catch(() => {
-    // No action needed, user is not logged in
+    
 });
 
 
@@ -27,7 +27,6 @@ if (!deviceId) {
   localStorage.setItem("deviceId", deviceId);
 }
 
-// 🧠 Existing login click handler...
 document.getElementById("login_btn").addEventListener("click", async () => {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value;
@@ -49,10 +48,10 @@ document.getElementById("login_btn").addEventListener("click", async () => {
             const data = await res.json();
 
             if (res.ok && data.twofa && data.token) {
-                // 🚨 TwoFA etkin, kullanıcıyı confirm sayfasına yönlendiriyoruz
+                // TwoFA etkin, confirm'e git
                 window.location.href = `/confirm?token=${encodeURIComponent(data.token)}`;
             } else if (res.ok) {
-                // ✅ 2FA yok → direkt profile'e git
+                // 2FA yok → profile'e git
                 window.location.href = "/profile";
             } else {
                 document.querySelector("#error .down_note").innerText = data.error || "login_failed";
