@@ -1,0 +1,79 @@
+ <!-- /confirm -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Login</title>
+     
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="/base.css">
+     <style>
+    
+    input[type="text"] {
+        width: 40px;
+        height: 60px;
+        font-size: large;
+        text-align: center;
+        text-indent: 0;
+    } 
+
+    .input_div {
+        gap: 10px;
+    }
+
+    #confirm_btn {
+        width: 150px;
+        height: 30px;
+        box-shadow: var(--glass-shadow);
+        border-radius: 30px;
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    #description {
+        position: absolute;
+        margin-top: 70px;
+        text-align: center;
+        width: 80%;
+    }
+
+    h1 {
+        padding-bottom: 30px;
+    }
+ 
+     </style>
+ </head>
+ <body>
+     <div id="background">
+         <h1>Confirm</h1>
+         <div class="down_note" id="description"></div>
+         <section id="credentials">
+             <div class="input_div">
+                 <input autocomplete="off" id="num1" type="text">
+                 <input autocomplete="off" id="num2" type="text">
+                 <input autocomplete="off" id="num3" type="text">
+                 <input autocomplete="off" id="num4" type="text">
+                 <input autocomplete="off" id="num5" type="text">
+                 <input autocomplete="off" id="num6" type="text">
+             </div>
+         </section>
+         <section>
+             <button id="confirm_btn">Confirm</button>
+         </section>
+         <section>
+             <div class="down_note" >Already registered? <a class="clickable_text" href="/login">Login</a></div>
+             <div class="down_note" >Don't have an account? <a class="clickable_text" href="/register">Register</a></div>
+         </section>
+         <section id="error">
+             <div class="down_note"></div>
+         </section>
+     </div>
+ </body>
+
+ <script src="/scripts/confirm.js"></script>
+  
+ </html>

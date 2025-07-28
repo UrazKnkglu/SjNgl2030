@@ -1,0 +1,156 @@
+ <!-- /forgot-password -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Login</title>
+     
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+ 
+     <link rel="stylesheet" href="/base.css">
+     <style>
+ 
+ #messages {
+    gap: 10px;
+    height: 320px;
+    width: 320px; /* 300 + biraz padding için */
+    overflow-y: auto;
+    overflow-x: hidden;
+    border: 1px solid #ccc;
+    padding: 10px;
+    list-style: none;
+  }
+
+  li {
+    width: 300px;       /* sabit genişlik */
+    min-width: 0;       /* flex içinde zorunlu */
+    height: 30px;
+    margin-bottom: 20px;
+    line-height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: rgba(240, 248, 255, 0.5);
+    border-radius: 30px;
+    padding-left: 15px;
+    border: 0;
+    
+    display: flex;
+    align-items: center;
+  }
+
+  #altt {
+    margin-bottom: 80px;
+  }
+
+  #ngl_bg_top {
+    width: 180px;
+    padding-left: 50px;
+    padding-right: 50px;
+    height: 80px;
+    background: linear-gradient(to bottom right, rgb(239, 40, 113),rgb(239, 60, 60),rgb(254, 135, 21)) ;
+    border-radius: 25px 25px 0 0;
+    z-index: 10;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0;
+  }
+  #ngl_bg_bottom {
+    width: 180px;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    padding-left: 50px;
+    padding-right: 50px;
+    background-color: white;
+    border-radius: 0 0 25px 25px;
+    box-shadow: gray 0px 5px 20px 0;
+    overflow-wrap: break-word;
+    text-align: center;
+  }
+
+  
+
+  button {
+    width: 280px;
+    height: 50px;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+  }
+
+  button:hover {
+    background-color: black;
+    color: white;
+}
+
+
+         #send_btn {
+             width: 150px;
+             height: 30px;
+             border-radius: 30px;
+             margin-top: 30px;
+             margin-right: 10px;
+             text-align: center;
+             border: 0;
+         }
+        
+         #alt {
+            display: none;
+         }
+         
+         h3 {
+            padding: 0;
+            margin: 0;
+         }
+
+     </style>
+ </head>
+ <body>
+     <div id="background">
+        <section>
+         <h3>NGL's To Saint Joseph 2030</h3>
+         <ul id="messages">Messages:</ul>
+        </section>
+        <section id="alt">
+            <section id="altt">
+                <div id="ngl_bg_top">
+                    <h3>bana anonim olarak </h3>
+                    <h3>mesajlar gönder!</h3>
+                </div>
+                <div id="ngl_bg_bottom">
+                    <h3></h3> <!--abcçdefgğhıijklmnoöprsştuüvyzabcçdefgğhıijklmnoöprsştuüvyz-->
+                </div>
+            </section>
+            <button id="shareBtn">
+                <svg width="40px" height="40px" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier"> 
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M15.5 5H9.5C7.29086 5 5.5 6.79086 5.5 9V15C5.5 17.2091 7.29086 19 9.5 19H15.5C17.7091 19 19.5 17.2091 19.5 15V9C19.5 6.79086 17.7091 5 15.5 5Z" 
+                            stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> 
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.5 15C10.8431 15 9.5 13.6569 9.5 12C9.5 10.3431 10.8431 9 12.5 9C14.1569 9 15.5 10.3431 15.5 12C15.5 12.7956 15.1839 13.5587 14.6213 14.1213C14.0587 14.6839 13.2956 15 12.5 15Z" 
+                            stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> 
+                        <rect x="15.5" y="9" width="2" height="2" rx="1" transform="rotate(-90 15.5 9)" 
+                            fill="#FFFFFF"></rect> 
+                        <rect x="16" y="8.5" width="1" height="1" rx="0.5" transform="rotate(-90 16 8.5)" 
+                            stroke="#FFFFFF" stroke-linecap="round"></rect> 
+                    </g>
+                </svg>
+                <h3>cevap ver</h3>
+            </button>
+        </section>
+     </div>
+ </body>
+ <script src="/scripts/messages.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+ </html>
