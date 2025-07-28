@@ -20,7 +20,7 @@ fetch('/api/profile', {
 
           const svgNS = "http://www.w3.org/2000/svg";
 
-// SVG oluştur
+// Insta Svg
 
 
       
@@ -33,7 +33,6 @@ svg.setAttribute("viewBox", "0 0 24 24");
 svg.setAttribute("fill", "none");
 svg.setAttribute("xmlns", svgNS);
 
-// PATH'leri oluştur
 const paths = [
   "M10 11V17",
   "M14 11V17",
@@ -86,7 +85,7 @@ svg.addEventListener("click", () => {
         }
       }
       
-      // Sayfa yüklenince çek
+      // Mesajları yükle
       loadMessages();
 
       
@@ -96,7 +95,7 @@ svg.addEventListener("click", () => {
     window.location.href = "/login";
   });
 
-// Fonksiyonları dışarıda tanımla
+
 async function checkMessageById(_id) {
     try {
       const res = await fetch(`/api/messages/${_id}`);
@@ -159,15 +158,13 @@ function dataURItoBlob(dataURI) {
   const canvas = await html2canvas(element, { backgroundColor: "null" });
   const dataURL = canvas.toDataURL("image/png");
 
-  // Yeni bir <img> oluştur
   const img = document.createElement("img");
   img.src = dataURL;
   img.alt = "Generated Image";
   img.style.maxWidth = "100%"; // responsive için
 
-  // Önceki varsa temizle
   const container = document.getElementById("altt");
-  container.innerHTML = ""; // eskiyi temizle
+  container.innerHTML = "";
   container.appendChild(img);
 
   const down_note = document.querySelector(".down_note")
@@ -189,7 +186,6 @@ if (id) {
     })
     .then(data => {
       console.log("Silindi:", data);
-      // Örneğin ana sayfaya yönlendir
       window.location.href = "/";
     })
     .catch(err => console.error(err));
