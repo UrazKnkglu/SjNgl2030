@@ -101,21 +101,22 @@ function dataURItoBlob(dataURI) {
   
 
   document.getElementById("shareBtn").addEventListener("click", async () => {
-    const element = document.querySelector("#altt");
-    const canvas = await html2canvas(element, { backgroundColor: "black" });
-    const dataURL = canvas.toDataURL("image/png");
-  
-    const res = await fetch(dataURL);
-    const blob = await res.blob();
-  
-    try {
-      await navigator.clipboard.write([
-        new ClipboardItem({ [blob.type]: blob })
-      ]);
-      alert("Image copied to clipboard!");
-    } catch (err) {
-      console.error("Failed to copy image: ", err);
-      alert("Copy failed");
-    }
-  });
-  
+  const element = document.querySelector("#altt");
+  const canvas = await html2canvas(element, { backgroundColor: "black" });
+  const dataURL = canvas.toDataURL("image/png");
+
+  // Yeni sekme aç ve resmi göster
+  const newTab = window.open();
+  if (newTab) {
+    newTab.document.body.style.margin = '0';
+    newTab.document.body.style.backgroundColor = 'black';
+    const img = newTab.document.createElement('img');
+    img.src = dataURL;
+    img.style.width = '100vw';
+    img.style.height = '100vh';
+    img.style.objectFit = 'contain';
+    newTab.document.body.appendChild(img);
+  } else {
+    alert('Popup engellendi, lütfen popup engelleyiciyi kapat.');
+  }
+});
