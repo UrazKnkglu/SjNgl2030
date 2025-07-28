@@ -9,7 +9,7 @@ fetch('/api/profile', {
   .then(data => {
     document.getElementById("greeting").textContent = `Welcome,\n ${data.user.username}!`;
 
-    // 🔐 2FA checkbox durumunu ayarla
+    // 2FA durumu
     document.getElementById("twoFA_checkbox").checked = data.user.twoFA.enabled;
 
     document.getElementById("username").value = data.user.username
@@ -26,7 +26,7 @@ fetch('/api/profile', {
     window.location.href = "/login";
   });
 
-  // 🔄 2FA checkbox toggle işlemi
+  // 2FA checkbox toggle
 document.getElementById("twoFA_checkbox").addEventListener("change", async (e) => {
   const enabled = e.target.checked;
   try {
@@ -34,7 +34,7 @@ document.getElementById("twoFA_checkbox").addEventListener("change", async (e) =
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
-      body: JSON.stringify({ enabled }) // true veya false gönder
+      body: JSON.stringify({ enabled })
     });
     const result = await res.json();
     if (!res.ok) {
@@ -44,7 +44,7 @@ document.getElementById("twoFA_checkbox").addEventListener("change", async (e) =
     console.error("2FA toggle error:", err);
   }
 });
-// 🔚 Logout
+//Logout
 document.getElementById("logout_btn").addEventListener("click", () => {
   fetch('/api/logout', {
     method: 'POST',
@@ -73,7 +73,7 @@ function generateUUID() {
   });
 }
 
-// Reset ALL trusted devices
+// Reset "ALL" trusted devices //////////////////
 async function resetAllTrustedDevices() {
   if (!confirm("Are you sure you want to remove ALL trusted devices?")) return;
 
@@ -93,7 +93,7 @@ async function resetAllTrustedDevices() {
   }
 }
 
-// Reset CURRENT device only
+// Reset CURRENT device only //////////////////
 async function resetThisDevice() {
   const deviceId = getDeviceId();
 
@@ -119,7 +119,7 @@ async function resetThisDevice() {
   }
 }
 
-// Attach event listeners to your buttons
+
 const buttons = document.querySelectorAll("#resetAllDevice, #removeThisDevice");
 
 buttons[0].addEventListener("click", resetAllTrustedDevices);
