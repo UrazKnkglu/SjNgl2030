@@ -87,7 +87,7 @@ window.addEventListener("load", () => {
 
 document.getElementById("shareBtn").addEventListener("click", async () => {
     const element = document.querySelector("#altt"); // istediğin element
-  const canvas = await html2canvas(element, { backgroundColor: "black" });
+  const canvas = await html2canvas(element, { backgroundColor: "null" });
   const dataURL = canvas.toDataURL("image/png");
 
   // Yeni bir <img> oluştur
