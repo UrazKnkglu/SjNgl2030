@@ -47,7 +47,10 @@ app.get('/', (req, res) => {
   //res.status(403).send('Disabled Users: just_admin');
 //});
 
-app.get(['/register', '/register.html'], (req, res) => {
+app.get('/register', (req, res) => {
+  res.status(403).send('Low Permission: just_admin');
+});
+app.get('/register.html' (req, res) => {
   res.status(403).send('Low Permission: just_admin');
 });
 
