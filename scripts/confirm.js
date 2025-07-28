@@ -11,7 +11,7 @@ document.getElementById('confirm_btn').addEventListener('click', async () => {
   }
 
   try {
-    // Create or get deviceId
+    // deviceId
 
     function generateUUID() {
       return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
@@ -58,7 +58,7 @@ document.getElementById('confirm_btn').addEventListener('click', async () => {
 });
 document.querySelectorAll("input").forEach(input => {
   input.addEventListener("input", () => {
-    // Move forward on input
+    
     let currentIndex = parseInt(input.id.slice(3, 4));
     let nextInput = document.getElementById(`num${currentIndex + 1}`);
     if (nextInput && input.value.length > 0) {
@@ -73,7 +73,7 @@ document.querySelectorAll("input").forEach(input => {
     }
   });
   input.addEventListener("keydown", (event) => {
-    // Go back on Backspace or Delete if empty
+    
     let currentIndex = parseInt(input.id.slice(3, 4));
     if (input.value.length === 0) {
       if ((event.key === "Backspace" || event.key === "Delete")) {
@@ -106,19 +106,16 @@ async function checkTokenPurpose() {
     } else if (data.purpose === "twofa_login") {
       descriptionEl.innerText = "A 6-digit code is sent to your email to log into your account. If the code didn't work, you can click the sent link to enter your code.";
 
-      // Create wrapper div
+      // wrapper div
       const wrapper = document.createElement("div");
       wrapper.style.marginTop = "10px";
 
-      // Create label
       const label = document.createElement("label");
 
-      // Create checkbox input
       const checkbox = document.createElement("input");
       checkbox.type = "checkbox";
       checkbox.id = "trustDevice";
 
-      // Add text next to checkbox
       const labelText = document.createTextNode(" Trust this device");
 
       // Assemble
