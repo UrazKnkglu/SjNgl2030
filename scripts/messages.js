@@ -103,7 +103,7 @@ document.getElementById("shareBtn").addEventListener("click", async () => {
 
   const down_note = document.querySelector(".down_note")
   if (down_note.innerText == "") {
-    down_note.innerText = "NGL'yi basılı tutarak fotoğraflara kaydet ve tekrar butona bas. Daha sonra hikaye kısmına NGL'yi yapıştır"
+    down_note.innerText = "NGL'yi basılı tutarak fotoğraflara kaydet ve tekrar butona bas. Daha sonra hikaye kısmında NGL'yi kullan"
     down_note.style.color = "darkgreen"
   } else {
     window.location.href = "instagram://story-camera";
