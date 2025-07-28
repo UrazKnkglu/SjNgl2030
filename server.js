@@ -14,7 +14,7 @@ const sendMessageRouter = require('./routes/sendMessage');
 
 
 const app = express();
-const PORT = 1001;
+const PORT = process.env.PORT || 1001;
 
 mongoose.connect(process.env.MONGO_URI, {
 });
@@ -46,5 +46,5 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running at http://192.168.1.5:${PORT}`);
+    console.log(`Server running at http://0.0.0.0:${PORT}`);
 });
