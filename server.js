@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
-
 const authRouter = require('./routes/auth');
 const profileRouter = require('./routes/profile');
 const confirmCodeRouter = require('./routes/confirmCode');
@@ -12,47 +11,48 @@ const twofaRouter = require('./routes/twofa');
 const middlewareRouter = require('./middleware/deleteTrusted');
 const sendMessageRouter = require('./routes/sendMessage');
 
-
 const app = express();
 const PORT = process.env.PORT || 1001;
 
-mongoose.connect(process.env.MONGO_URI, {
-});
+// MongoDB bağlantısı
+mongoose.connect(process.env.MONGO_URI, {});
 
-
-
-app.use(express.json({limit: "10mb"}));
+// Middleware
+app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
+
+// Public klasörü
 app.use(express.static(path.join(__dirname, 'public')));
 
+// API routerlar
 app.use('/api', authRouter);
 app.use('/api', profileRouter);
 app.use('/api', confirmCodeRouter);
 app.use('/api', twofaRouter);
 app.use('/api', sendMessageRouter);
-
 app.use('/middleware', middlewareRouter);
 app.use('/scripts', express.static(path.join(__dirname, '/scripts')));
 
+// Ana sayfa
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'send_ngl.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-// public klasöründeki .html dosyalarını .html yazmadan aç
+// Public klasöründeki .html dosyalarını .html yazmadan göster
 app.get('/:page', (req, res, next) => {
   const filePath = path.join(__dirname, 'public', `${req.params.page}.html`);
   res.sendFile(filePath, (err) => {
     if (err) {
-      next(); // Dosya yoksa 404'e düş
+      next();
     }
   });
 });
 
-// 404 fallback
+// 404
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running at http://0.0.0.0:${PORT}`);
+  console.log(`Server running at http://0.0.0.0:${PORT}`);
 });
