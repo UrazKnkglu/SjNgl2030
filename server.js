@@ -19,10 +19,10 @@ mongoose.connect(process.env.MONGO_URI, {});
 app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
 
-// 1) public dosyaları static servis et
+// public static servis et
 app.use(express.static(path.join(__dirname, 'public')));
 
-// 2) API rotaları
+// API rootes
 app.use('/api', authRouter);
 app.use('/api', profileRouter);
 app.use('/api', confirmCodeRouter);
@@ -31,7 +31,7 @@ app.use('/api', sendMessageRouter);
 app.use('/middleware', middlewareRouter);
 app.use('/scripts', express.static(path.join(__dirname, '/scripts')));
 
-// 3) root sayfası
+// root page
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'send_ngl.html'));
 });
@@ -47,15 +47,15 @@ app.get(['/send_ngl', '/messages', '/send_ngl.html', '/messages.html'], (req, re
   res.status(403).send('Disabled Users: just_admin');
 });
 
-//app.get(['/confirm', '/forgot-password', '/register', '/reset-password', '/confirm.html', '/forgot-password.html', '/register.html', '/reset-password.html'], (req, res) => {
+//app.get(['/register', '/register.html'], (req, res) => {
   //res.status(403).send('Low Permission: just_admin');
 //});
 
-//profile, login is not being disabled anymore
+//profile, login-allpage is not being disabled anymore
 
 //
 
-// 4) public klasöründeki html'leri .html yazmadan göster
+// 4) public /.html -> /.
 app.get('/:page', (req, res, next) => {
   const filePath = path.join(__dirname, 'public', `${req.params.page}.html`);
   res.sendFile(filePath, (err) => {
