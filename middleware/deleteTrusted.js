@@ -1,6 +1,3 @@
-// routes/middleware.js (or wherever you want)
-// Make sure this file is required in your main app with app.use('/middleware', middlewareRouter)
-
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
