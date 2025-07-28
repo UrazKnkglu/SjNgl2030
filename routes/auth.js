@@ -70,7 +70,7 @@ router.post('/login', async (req, res) => {
 
 if (trustedDevice) {
 
-  // JWT oluştur ve çereze yaz
+  // JWT + çerez 
   const fullToken = jwt.sign(
     { userId: user._id },
     JWT_SECRET,
@@ -90,7 +90,7 @@ if (trustedDevice) {
 
 
 
-  // Eğer 2FA aktifse, token göndermiyoruz!
+  // 2FA aktifse, token yok
   if (user.twoFA.enabled) {
     const tempToken = jwt.sign(
       { userId: user._id, purpose: "twofa_login", rememberMe }, 
@@ -98,7 +98,7 @@ if (trustedDevice) {
       { expiresIn: "10m" }
     );
   
-    // 6 haneli doğrulama kodu oluştur
+    // 6dig code
     
 
     const al = new Date(Date.now() + 10 * 60 * 1000)
@@ -205,7 +205,7 @@ router.post('/reset-password', async (req, res) => {
         const hashedPassword = await bcrypt.hash(newPassword, 10);
         user.password = hashedPassword;
 
-        // resetCode ve diğer reset verilerini temizle
+        // veri temizle
         user.resetCode = undefined;
         await user.save();
 
@@ -234,10 +234,10 @@ router.post('/send-register-code', async (req, res) => {
       // Şifreyi hashle
       const hashedPassword = await bcrypt.hash(password, 10);
   
-      // 6 haneli kod üret
+      // 6dig code
       const code = generateSixDigitCode();
   
-      // Token oluştur, içinde kullanıcı bilgileri ve amaç: register var
+      // Token oluştur, içinde kullanıcı bilgileri ve amaç: register var ////////////
       const token = jwt.sign(
         {
           username,
@@ -266,7 +266,7 @@ router.post('/send-register-code', async (req, res) => {
       if (!global.registerCodes) global.registerCodes = new Map();
       global.registerCodes.set(token, {
         code,
-        expiresAt: Date.now() + 10 * 60 * 1000 // 10 dakika geçerli
+        expiresAt: Date.now() + 10 * 60 * 1000 // 10dk
       });
   
       res.json({ message: 'verification_email_sent', confirmLink: link });
@@ -282,7 +282,7 @@ router.post('/send-register-code', async (req, res) => {
     if (!token) return res.status(400).json({ error: 'missing_token' });
   
     try {
-      const decoded = jwt.verify(token, JWT_SECRET); // doğrulama dahil
+      const decoded = jwt.verify(token, JWT_SECRET); // doğrulama
       res.json({ purpose: decoded.purpose });
     } catch (err) {
       res.status(401).json({ error: 'invalid_token' });
