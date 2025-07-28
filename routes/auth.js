@@ -168,7 +168,7 @@ router.post('/forgot-password', async (req, res) => {
     };
     await user.save();
 
-    const link = `http://192.168.1.5:1001/confirm?token=${token}`;
+    const link = `https://sjngl2030.onrender.com/confirm?token=${token}`;
 
     const mailOptions = {
       from: process.env.EMAIL_USER,
