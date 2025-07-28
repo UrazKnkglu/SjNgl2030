@@ -85,26 +85,28 @@ window.addEventListener("load", () => {
     history.replaceState(null, "", window.location.pathname + window.location.search);
 })
 
-function dataURItoBlob(dataURI) {
-    const byteString = atob(dataURI.split(',')[1]);
-    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-  
-    const ab = new ArrayBuffer(byteString.length);
-    const ia = new Uint8Array(ab);
-  
-    for (let i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-  
-    return new Blob([ab], { type: mimeString });
-  }
-  
-
-  document.getElementById("shareBtn").addEventListener("click", async () => {
-  const element = document.querySelector("#altt");
+document.getElementById("shareBtn").addEventListener("click", async () => {
+    const element = document.querySelector("#altt"); // istediğin element
   const canvas = await html2canvas(element, { backgroundColor: "black" });
   const dataURL = canvas.toDataURL("image/png");
 
-  // window.location'ı base64 dataURL yap
-  window.location.href = dataURL;
-});
+  // Yeni bir <img> oluştur
+  const img = document.createElement("img");
+  img.src = dataURL;
+  img.alt = "Generated Image";
+  img.style.maxWidth = "100%"; // responsive için
+
+  // Önceki varsa temizle
+  const container = document.getElementById("altt");
+  container.innerHTML = ""; // eskiyi temizle
+  container.appendChild(img);
+
+  const down_note = document.querySelector(".down_note")
+  if (down_note.innerText == "") {
+    down_note.innerText = "NGL'yi kopyala ve tekrar butona bas. Daha sonra siyah ekranın üstüne NGL'yi yapıştır"
+    down_note.style.color = "darkgreen"
+  } else {
+    window.location.href = "instagram://story-camera";
+  }
+
+  });
