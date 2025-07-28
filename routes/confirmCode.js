@@ -16,7 +16,7 @@ router.post('/confirm-code', async (req, res) => {
   try {
     const decoded = jwt.verify(token, JWT_SECRET);    
     
-    // Check the purpose of the token
+    // token purpose
     if (
       decoded.purpose !== 'forgot' &&
       decoded.purpose !== 'register' &&
@@ -103,7 +103,7 @@ router.post('/confirm-code', async (req, res) => {
       global.twoFACodes.delete(token);
       global.tokenBlacklist.add(token);
 
-      // ✅ If checkbox was selected, trust this device
+      // If trusted checkbox was selected, trust this device
       if (trustDevice && deviceId) {
         const alreadyTrusted = user.trustedDevices?.some(d => d.deviceId === deviceId);
         if (!alreadyTrusted) {
@@ -120,7 +120,7 @@ router.post('/confirm-code', async (req, res) => {
         { expiresIn: decoded.rememberMe ? "7d" : "1h" }
       );
 
-      // Set cookie with full auth token
+      // Set cookie with full auth token //////////////////
       res.cookie("token", fullToken, {
         httpOnly: true,
         sameSite: "Strict",
