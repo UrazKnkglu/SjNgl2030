@@ -43,13 +43,13 @@ app.get('/', (req, res) => {
 //DISABLING
 
 
-app.get(['/send_ngl', '/messages', '/send_ngl.html', '/messages.html'], (req, res) => {
-  res.status(403).send('Disabled Users: just_admin');
-});
-
-//app.get(['/register', '/register.html'], (req, res) => {
-  //res.status(403).send('Low Permission: just_admin');
+//app.get(['/send_ngl', '/messages', '/send_ngl.html', '/messages.html'], (req, res) => {
+  //res.status(403).send('Disabled Users: just_admin');
 //});
+
+app.get(['/register', '/register.html'], (req, res) => {
+  res.status(403).send('Low Permission: just_admin');
+});
 
 //profile, login-allpage is not being disabled anymore
 
