@@ -36,6 +36,25 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'send_ngl.html'));
 });
 
+
+
+
+
+//DISABLING
+
+
+app.get(['/send_ngl', '/messages', '/send_ngl.html', '/messages.html'], (req, res) => {
+  res.status(403).send('Disabled Users: just_admin');
+});
+
+//app.get(['/confirm', '/forgot-password', '/register', '/reset-password', '/confirm.html', '/forgot-password.html', '/register.html', '/reset-password.html'], (req, res) => {
+  //res.status(403).send('Low Permission: just_admin');
+//});
+
+//profile, login is not being disabled anymore
+
+//
+
 // 4) public klasöründeki html'leri .html yazmadan göster
 app.get('/:page', (req, res, next) => {
   const filePath = path.join(__dirname, 'public', `${req.params.page}.html`);
