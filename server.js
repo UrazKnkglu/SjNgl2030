@@ -19,53 +19,37 @@ mongoose.connect(process.env.MONGO_URI, {});
 app.use(express.json({ limit: '10mb' }));
 app.use(cookieParser());
 
-// public static servis et
+// Statik dosyalar
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/scripts', express.static(path.join(__dirname, '/scripts')));
 
-// API rootes
+// *** API'ler EN ÜSTE ***
 app.use('/api', authRouter);
 app.use('/api', profileRouter);
 app.use('/api', confirmCodeRouter);
 app.use('/api', twofaRouter);
 app.use('/api', sendMessageRouter);
 app.use('/middleware', middlewareRouter);
-app.use('/scripts', express.static(path.join(__dirname, '/scripts')));
 
-// root page
+// *** ENGELLENEN sayfalar ***
+app.get(['/register', '/register.html'], (req, res) => {
+  res.status(403).send('Low Permission: just_admin');
+});
+
+// Ana sayfa
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'send_ngl.html'));
 });
 
-
-
-
-
-//DISABLING
-
-
-//app.get(['/send_ngl', '/messages', '/send_ngl.html', '/messages.html'], (req, res) => {
-  //res.status(403).send('Disabled Users: just_admin');
-//});
-
-app.get('/register', (req, res) => {
-  res.status(403).send('Low Permission: just_admin');
-});
-
-//profile, login-allpage is not being disabled anymore
-
-//
-
-// 4) public /.html -> /.
+// *** Public içindeki bütün .html'ler için .html'siz yönlendirme ***
 app.get('/:page', (req, res, next) => {
   const filePath = path.join(__dirname, 'public', `${req.params.page}.html`);
   res.sendFile(filePath, (err) => {
-    if (err) {
-      next();
-    }
+    if (err) next();
   });
 });
 
-// 5) 404
+// *** En sonda 404 ***
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
