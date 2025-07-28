@@ -55,5 +55,22 @@ router.get('/messages', async (req, res) => {
       res.status(500).json({ error: "Sunucu hatası" });
     }
   });
+
+router.post("/uploadStoryImage", async (req, res) => {
+    try {
+      const base64Data = req.body.image.replace(/^data:image\/png;base64,/, "");
+      const fileName = `${Date.now()}.png`;
+      const filePath = path.join(__dirname, "../public/stories", fileName);
+  
+      fs.writeFileSync(filePath, base64Data, "base64");
+  
+      // Kullanıcıya public URL dön
+      res.json({ url: `/stories/${fileName}` });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: "Upload failed" });
+    }
+  });
+  
   
 module.exports = router;
