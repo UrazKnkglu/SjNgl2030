@@ -43,4 +43,17 @@ router.get('/messages', async (req, res) => {
     }
   });
   
+  router.delete('/messages/:id', async (req, res) => {
+    try {
+      const deletedMessage = await Message.findByIdAndDelete(req.params.id);
+      if (!deletedMessage) {
+        return res.status(404).json({ error: "Mesaj bulunamadı" });
+      }
+      res.json({ success: true, message: "Mesaj silindi" });
+    } catch (err) {
+      console.error("Mesaj silme hatası:", err);
+      res.status(500).json({ error: "Sunucu hatası" });
+    }
+  });
+  
 module.exports = router;
