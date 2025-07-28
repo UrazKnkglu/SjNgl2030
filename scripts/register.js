@@ -11,7 +11,7 @@ document.getElementById("register_btn").addEventListener("click", async () => {
     }
 
     try {
-        const res = await fetch(`http://${location.hostname}:1001/api/send-register-code`, {
+        const res = await fetch(`/api/send-register-code`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
