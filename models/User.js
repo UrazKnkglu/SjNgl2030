@@ -1,5 +1,6 @@
 // models/User.js
 const mongoose = require('mongoose');
+// mongoose bağlantısı
 
 const trustedDeviceSchema = new mongoose.Schema({
   deviceId: String,

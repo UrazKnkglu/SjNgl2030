@@ -5,7 +5,8 @@ document.getElementById("register_btn").addEventListener("click", async () => {
 
     const errorBox = document.querySelector("#error .down_note");
 
-    if (!username || !email || !password) {
+    if (!username || !email || !password) { 
+    //boş bırakıldı mı diye kontrol ediyor, bulunursa uyarı veriyor.
         errorBox.innerText = "empty_fields";
         return;
     }

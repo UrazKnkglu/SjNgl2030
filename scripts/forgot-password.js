@@ -1,6 +1,7 @@
 document.getElementById('send_btn').addEventListener('click', async () => {
     const email = document.getElementById('email').value.trim();
-    if (!email) {
+    if (!email) { 
+    //eposta yazılmadıysa
         document.querySelector("#error").querySelector(".down_note").innerText = ('Lütfen e-posta adresinizi girin.');
             document.querySelector("#error").querySelector(".down_note").style.color = "red"
         return;
